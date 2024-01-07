@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 
-// Conectar a la base de datos MongoDB
-mongoose.connect('mongodb://localhost:27017/tu-base-de-datos', {
+// Base de datos MongoDB
+mongoose.connect('mongodb://localhost:27017/uoclogin', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
