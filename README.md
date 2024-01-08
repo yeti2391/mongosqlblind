@@ -1,1 +1,1 @@
-Web para la practica de SQL Blind de la UOC
+Web para la practica de SQL Injection de la UOC
