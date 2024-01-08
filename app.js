@@ -22,23 +22,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Ruta para la página de login
+app.get('/login', (req, res)=> {
+  res.sendFile(__dirname + '/login.html');
+});
+
 app.post('/login', async (req, res) => {
   const { usuario, contraseña } = req.body;
 
   try {
-    // Consulta parametrizada para evitar inyecciones NoSQL
-    const resultado = await Usuario.findOne({ usuario: usuario, contraseña: contraseña });
+    // Consulta con vulnerabilidad
+    const resultado = await Usuario.findOne({ usuario: usuario, contraseña:contraseña });
 
     if (resultado) {
       // Autenticación exitosa
-      res.status(200).json({ mensaje: '¡Bienvenido!' });
+      res.status(200).json({ mensaje: '¡Bienvenido/a!' });
     } else {
       // Usuario o contraseña incorrectos
       res.status(401).json({ mensaje: 'Error de autenticación' });
     }
   } catch (error) {
     // Manejar errores de la base de datos
-    console.error(error);
+    console.error('Error en base de datos', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });
   }
 });

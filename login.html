@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="loginForm" action="/login" method="post">
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" required>
+        <br>
+        <label for="contraseña">Contraseña:</label>
+        <input type="password" id="contraseña" name="contraseña" required>
+        <br>
+        <button type="submit">Iniciar sesión</button>
+    </form>
+
+
+    <script>
+        // Este script cumple como unica funcion mostrar una alerta con el resultado del input de usuario y contra
+
+
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            // Leer los valores del formulario
+            const usuario = document.getElementById('usuario').value;
+            const contraseña = document.getElementById('contraseña').value;
+
+            // Realiza la solicitud al servidor
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ usuario, contraseña })
+            });
+
+            // Analiza la respuesta del servidor
+            const result = await response.json();
+
+            // Muestra la alerta según la respuesta
+            alert(result.mensaje);
+        });
+    </script>
+</body>
+</html>
